@@ -95,6 +95,11 @@ class Measure is export {
     method Numeric   { $.value }
 	method value-r   { $round-to ?? $.value.round($round-to) !! $.value }
     method Str       { "{$.value-r} {$.units}" }
+    method raku {
+        return qq:to/END/;
+        Measure.new( value => $.value, units => $.units ); 
+        END  
+    }    
     method canonical { 
 		my $rebased = $.in( $.units.canonical);
 		"{$rebased.value-r} {$.units.canonical}" 
